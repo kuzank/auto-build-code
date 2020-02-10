@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kuzank.autobuildcode.datasource.temp.SchoolStudentPODao">
+
+    <resultMap id="BaseResultMap" type="com.kuzank.autobuildcode.datasource.temp.SchoolStudentPO">
+        <result column="id" property="id" jdbcType="INTEGER"/>
+        <result column="uuid" property="uuid" jdbcType="VARCHAR"/>
+        <result column="deleted" property="deleted" jdbcType="BOOLEAN"/>
+        <result column="created_by" property="createdBy" jdbcType="INTEGER"/>
+        <result column="updated_by" property="updatedBy" jdbcType="INTEGER"/>
+        <result column="created_at" property="createdAt" jdbcType="DATETIME"/>
+        <result column="updated_at" property="updatedAt" jdbcType="DATETIME"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="age" property="age" jdbcType="INTEGER"/>
+        <result column="birthday" property="birthday" jdbcType="DATETIME"/>
+        <result column="merried" property="merried" jdbcType="BOOLEAN"/>
+        <result column="heigth" property="heigth" jdbcType="DOUBLE"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,
+        uuid,
+        deleted,
+        created_by,
+        updated_by,
+        created_at,
+        updated_at,
+        description,
+        name,
+        age,
+        birthday,
+        merried,
+        heigth
+    </sql>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="schoolStudentPO.id">
+        INSERT INTO school_student (
+        <include refid="Base_Column_List"/>
+        ) VALUES (
+            #{schoolStudentPO.id,jdbcType=INTEGER},
+            #{schoolStudentPO.uuid,jdbcType=VARCHAR},
+            #{schoolStudentPO.deleted,jdbcType=BOOLEAN},
+            #{schoolStudentPO.createdBy,jdbcType=INTEGER},
+            #{schoolStudentPO.updatedBy,jdbcType=INTEGER},
+            #{schoolStudentPO.createdAt,jdbcType=DATETIME},
+            #{schoolStudentPO.updatedAt,jdbcType=DATETIME},
+            #{schoolStudentPO.description,jdbcType=VARCHAR},
+            #{schoolStudentPO.name,jdbcType=VARCHAR},
+            #{schoolStudentPO.age,jdbcType=INTEGER},
+            #{schoolStudentPO.birthday,jdbcType=DATETIME},
+            #{schoolStudentPO.merried,jdbcType=BOOLEAN},
+            #{schoolStudentPO.heigth,jdbcType=DOUBLE}
+        )
+    </insert>
+
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="schoolStudentPO.id">
+        INSERT INTO school_student
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="schoolStudentPO.id != null">id,</if>
+            <if test="schoolStudentPO.uuid != null">uuid,</if>
+            <if test="schoolStudentPO.deleted != null">deleted,</if>
+            <if test="schoolStudentPO.createdBy != null">created_by,</if>
+            <if test="schoolStudentPO.updatedBy != null">updated_by,</if>
+            <if test="schoolStudentPO.createdAt != null">created_at,</if>
+            <if test="schoolStudentPO.updatedAt != null">updated_at,</if>
+            <if test="schoolStudentPO.description != null">description,</if>
+            <if test="schoolStudentPO.name != null">name,</if>
+            <if test="schoolStudentPO.age != null">age,</if>
+            <if test="schoolStudentPO.birthday != null">birthday,</if>
+            <if test="schoolStudentPO.merried != null">merried,</if>
+            <if test="schoolStudentPO.heigth != null">heigth</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="schoolStudentPO.id != null">#{schoolStudentPO.id,jdbcType=INTEGER},</if>
+            <if test="schoolStudentPO.uuid != null">#{schoolStudentPO.uuid,jdbcType=VARCHAR},</if>
+            <if test="schoolStudentPO.deleted != null">#{schoolStudentPO.deleted,jdbcType=BOOLEAN},</if>
+            <if test="schoolStudentPO.createdBy != null">#{schoolStudentPO.createdBy,jdbcType=INTEGER},</if>
+            <if test="schoolStudentPO.updatedBy != null">#{schoolStudentPO.updatedBy,jdbcType=INTEGER},</if>
+            <if test="schoolStudentPO.createdAt != null">#{schoolStudentPO.createdAt,jdbcType=DATETIME},</if>
+            <if test="schoolStudentPO.updatedAt != null">#{schoolStudentPO.updatedAt,jdbcType=DATETIME},</if>
+            <if test="schoolStudentPO.description != null">#{schoolStudentPO.description,jdbcType=VARCHAR},</if>
+            <if test="schoolStudentPO.name != null">#{schoolStudentPO.name,jdbcType=VARCHAR},</if>
+            <if test="schoolStudentPO.age != null">#{schoolStudentPO.age,jdbcType=INTEGER},</if>
+            <if test="schoolStudentPO.birthday != null">#{schoolStudentPO.birthday,jdbcType=DATETIME},</if>
+            <if test="schoolStudentPO.merried != null">#{schoolStudentPO.merried,jdbcType=BOOLEAN},</if>
+            <if test="schoolStudentPO.heigth != null">#{schoolStudentPO.heigth,jdbcType=DOUBLE}</if>
+        </trim>
+    </insert>
+
+    <insert id="insertList">
+        INSERT INTO book (
+        <include refid="Base_Column_List"/>
+        )VALUES
+        <foreach collection="bookPOs" item="bookPO" index="index" separator=",">
+            (
+            #{schoolStudentPO.id,jdbcType=INTEGER},
+            #{schoolStudentPO.uuid,jdbcType=VARCHAR},
+            #{schoolStudentPO.deleted,jdbcType=BOOLEAN},
+            #{schoolStudentPO.createdBy,jdbcType=INTEGER},
+            #{schoolStudentPO.updatedBy,jdbcType=INTEGER},
+            #{schoolStudentPO.createdAt,jdbcType=DATETIME},
+            #{schoolStudentPO.updatedAt,jdbcType=DATETIME},
+            #{schoolStudentPO.description,jdbcType=VARCHAR},
+            #{schoolStudentPO.name,jdbcType=VARCHAR},
+            #{schoolStudentPO.age,jdbcType=INTEGER},
+            #{schoolStudentPO.birthday,jdbcType=DATETIME},
+            #{schoolStudentPO.merried,jdbcType=BOOLEAN},
+            #{schoolStudentPO.heigth,jdbcType=DOUBLE}
+            )
+        </foreach>
+    </insert>
+
+    <select id="selectById" resultMap="BaseResultMap" parameterMap="java.lang.Integer">
+        select * from school_student where id = #{id} and deleted = 0
+    </select>
+
+    <select id="selectByUUID" resultMap="BaseResultMap" parameterMap="java.lang.String">
+        select * from school_student where uuid = ${uuid} and deleted = 0
+    </select>
+
+    <update id="deleteById" parameterMap="java.lang.Integer">
+        update school_student set deleted = 1,updatedBy = ${updatedBy},updatedAt=now() where id =#{id}
+    </update>
+
+    <update id="deleteByUUID" parameterMap="java.lang.String">
+        update school_student set deleted = 1,updatedBy = ${updatedBy},updatedAt=now() where uuid =#{uuid}
+    </update>
+
+    <update id="updateById">
+        UPDATE book
+        <set>
+            <if test="schoolStudentPO.id != null">id= #{schoolStudentPO.id,jdbcType=INTEGER},</if>
+            <if test="schoolStudentPO.uuid != null">uuid= #{schoolStudentPO.uuid,jdbcType=VARCHAR},</if>
+            <if test="schoolStudentPO.deleted != null">deleted= #{schoolStudentPO.deleted,jdbcType=BOOLEAN},</if>
+            <if test="schoolStudentPO.createdBy != null">created_by= #{schoolStudentPO.createdBy,jdbcType=INTEGER},</if>
+            <if test="schoolStudentPO.updatedBy != null">updated_by= #{schoolStudentPO.updatedBy,jdbcType=INTEGER},</if>
+            <if test="schoolStudentPO.createdAt != null">created_at= #{schoolStudentPO.createdAt,jdbcType=DATETIME},</if>
+            <if test="schoolStudentPO.updatedAt != null">updated_at= #{schoolStudentPO.updatedAt,jdbcType=DATETIME},</if>
+            <if test="schoolStudentPO.description != null">description= #{schoolStudentPO.description,jdbcType=VARCHAR},</if>
+            <if test="schoolStudentPO.name != null">name= #{schoolStudentPO.name,jdbcType=VARCHAR},</if>
+            <if test="schoolStudentPO.age != null">age= #{schoolStudentPO.age,jdbcType=INTEGER},</if>
+            <if test="schoolStudentPO.birthday != null">birthday= #{schoolStudentPO.birthday,jdbcType=DATETIME},</if>
+            <if test="schoolStudentPO.merried != null">merried= #{schoolStudentPO.merried,jdbcType=BOOLEAN},</if>
+            <if test="schoolStudentPO.heigth != null">heigth= #{schoolStudentPO.heigth,jdbcType=DOUBLE}</if>
+        </set>
+        WHERE id = #{schoolStudentPO.id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByUUID">
+        UPDATE book
+        <set>
+            <if test="schoolStudentPO.id != null">id= #{schoolStudentPO.id,jdbcType=INTEGER},</if>
+            <if test="schoolStudentPO.uuid != null">uuid= #{schoolStudentPO.uuid,jdbcType=VARCHAR},</if>
+            <if test="schoolStudentPO.deleted != null">deleted= #{schoolStudentPO.deleted,jdbcType=BOOLEAN},</if>
+            <if test="schoolStudentPO.createdBy != null">created_by= #{schoolStudentPO.createdBy,jdbcType=INTEGER},</if>
+            <if test="schoolStudentPO.updatedBy != null">updated_by= #{schoolStudentPO.updatedBy,jdbcType=INTEGER},</if>
+            <if test="schoolStudentPO.createdAt != null">created_at= #{schoolStudentPO.createdAt,jdbcType=DATETIME},</if>
+            <if test="schoolStudentPO.updatedAt != null">updated_at= #{schoolStudentPO.updatedAt,jdbcType=DATETIME},</if>
+            <if test="schoolStudentPO.description != null">description= #{schoolStudentPO.description,jdbcType=VARCHAR},</if>
+            <if test="schoolStudentPO.name != null">name= #{schoolStudentPO.name,jdbcType=VARCHAR},</if>
+            <if test="schoolStudentPO.age != null">age= #{schoolStudentPO.age,jdbcType=INTEGER},</if>
+            <if test="schoolStudentPO.birthday != null">birthday= #{schoolStudentPO.birthday,jdbcType=DATETIME},</if>
+            <if test="schoolStudentPO.merried != null">merried= #{schoolStudentPO.merried,jdbcType=BOOLEAN},</if>
+            <if test="schoolStudentPO.heigth != null">heigth= #{schoolStudentPO.heigth,jdbcType=DOUBLE}</if>
+        </set>
+        WHERE id = #{schoolStudentPO.uuid,jdbcType=VARCHAR}
+    </update>
+
+    <select id="findAll" resultMap="BaseResultMap">
+        select * from school_student where deleted = 0
+    </select>
+
+</mapper>

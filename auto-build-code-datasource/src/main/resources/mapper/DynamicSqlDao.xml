@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kuzank.autobuildcode.datasource.dao.DynamicSqlDao">
+
+    <select id="dynamicConditionQuery" resultType="java.util.HashMap"
+            parameterType="java.util.Map">
+        select * from
+        ${collection}
+        <if test="null != conditions">
+            where deleted = 0
+            <foreach collection="conditions" index="key" item="value" separator="and">
+                ${key}=#{value}
+            </foreach>
+        </if>
+        <if test="null != sort">
+            order by ${sort}
+        </if>
+    </select>
+
+    <insert id="dynamicInsert" parameterType="java.util.Map">
+        insert into ${collection}
+        <foreach collection="fields" index="key" item="value" open="(" close=")" separator=",">
+            ${key}
+        </foreach>
+        values
+        <foreach collection="fields" index="key" item="value" open="(" close=")" separator=",">
+            #{value}
+        </foreach>
+    </insert>
+
+    <update id="dynamicUpdate" parameterType="java.util.Map">
+        update ${collection} set
+        <foreach collection="fields" index="key" item="value" separator=",">
+            ${key}=#{value}
+        </foreach>
+        where ${mainKey}=#{keyValue}
+    </update>
+
+    <select id="simpleDynamicQuery" resultType="java.util.HashMap"
+            parameterType="java.lang.String">
+        ${sql}
+    </select>
+
+    <update id="simpleDynamicUpdate" parameterType="java.lang.String">
+        ${sql}
+    </update>
+
+    <update id="dynamicHardDelete" parameterType="java.util.Map">
+        DELETE FROM ${collection} WHERE
+        <foreach collection="fields" index="key" item="value" separator="and">
+            ${key}=#{value}
+        </foreach>
+    </update>
+
+    <update id="dynamicSoftDelete" parameterType="java.util.Map">
+        update ${collection} set deleted = 1 WHERE
+        <foreach collection="fields" index="key" item="value" separator="and">
+            ${key}=#{value}
+        </foreach>
+    </update>
+
+    <update id="dynamicHardDeleteById" parameterType="java.lang.String">
+        DELETE FROM ${collection} WHERE id=#{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="dynamicSoftDeleteById" parameterType="java.lang.String">
+        update ${collection} set deleted = 1 WHERE id=#{id,jdbcType=INTEGER}
+    </update>
+
+    <sql id="common_dynamic_conditions">
+        <foreach collection="con" index="index" item="item">
+            <choose>
+                <when test="item.isValue">#{item.fragment}</when>
+                <otherwise>${item.fragment}</otherwise>
+            </choose>
+        </foreach>
+    </sql>
+
+    <!--复杂搜索 -->
+    <select id="dynamicQuery" resultType="java.util.HashMap"
+            parameterType="map">
+        SELECT
+        <choose>
+            <when test="null !=  doc.source">
+                <foreach collection="doc.source" index="index" item="item" separator=",">
+                    <if test="null != item.field">${item.field}</if>
+                    <if test="null != item.subQuery">
+                        <foreach collection="item.subQuery" index="index" item="item2">
+                            <choose>
+                                <when test="item2.isValue">#{item2.fragment}</when>
+                                <otherwise>${item2.fragment}</otherwise>
+                            </choose>
+                        </foreach>
+                    </if>
+                    <if test="null != item.alias">AS ${item.alias}</if>
+                </foreach>
+            </when>
+            <otherwise>*</otherwise>
+        </choose>
+        FROM ${doc.collection}
+        <if test="null != doc.alias">${doc.alias}</if>
+        <if test="null != doc.joins">
+            <foreach collection="doc.joins" index="index" item="joinSource">
+                ${joinSource.head} ${joinSource.collection}
+                <if test="null != joinSource.alias">${joinSource.alias}</if>
+                <if test="null != joinSource.conditions">
+                    ON
+                    <foreach collection="joinSource.conditions" index="index" item="con">
+                        <include refid="common_dynamic_conditions"/>
+                    </foreach>
+                </if>
+            </foreach>
+        </if>
+        <if test="null != doc.conditions">
+            WHERE
+            <foreach collection="doc.conditions" index="index" item="con">
+                <include refid="common_dynamic_conditions"/>
+            </foreach>
+        </if>
+        <if test="null != doc.groupBy">
+            GROUP BY
+            <foreach collection="doc.groupBy" index="index" item="groupItem" separator=",">
+                ${groupItem}
+            </foreach>
+        </if>
+        <if test="null != doc.order ">
+            ORDER BY
+            <foreach collection="doc.order" index="index" item="orderItem" separator=",">
+                <if test="null != orderItem.field">${orderItem.field}</if>
+                <if test="null != orderItem.sort">${orderItem.sort}</if>
+            </foreach>
+        </if>
+        <if test="null != doc.limit">
+            limit
+            <trim suffixOverrides=",">
+                <if test="null != doc.limit.offset">${doc.limit.offset},</if>
+                <if test="null != doc.limit.pageSize">${doc.limit.pageSize},</if>
+            </trim>
+        </if>
+    </select>
+
+</mapper>

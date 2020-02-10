@@ -1,0 +1,4 @@
+# 自动加载
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.kuzank.autobuildcode.datasource.config.MyBatisConfig,\
+com.kuzank.autobuildcode.datasource.config.AutoBuildCodeConfig

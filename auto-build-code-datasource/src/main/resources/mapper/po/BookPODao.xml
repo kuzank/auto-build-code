@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kuzank.autobuildcode.datasource.dao.po.BookPODao">
+    <!--auto generated Code-->
+    <resultMap id="BaseResultMap" type="com.kuzank.autobuildcode.datasource.entity.po.BookPO">
+        <result column="note_id" property="noteId" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="color" property="color" jdbcType="VARCHAR"/>
+        <result column="sortname" property="sortname" jdbcType="INTEGER"/>
+        <result column="id" property="id" jdbcType="INTEGER"/>
+        <result column="uuid" property="uuid" jdbcType="VARCHAR"/>
+        <result column="deleted" property="deleted" jdbcType="TINYINT"/>
+        <result column="created_by" property="createdBy" jdbcType="INTEGER"/>
+        <result column="updated_by" property="updatedBy" jdbcType="INTEGER"/>
+        <result column="created_at" property="createdAt" javaType="java.sql.Date" jdbcType="TIMESTAMP"/>
+        <result column="updated_at" property="updatedAt" javaType="java.sql.Date" jdbcType="TIMESTAMP"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="Base_Column_List">
+        note_id,
+        name,
+        color,
+        sortname,
+        id,
+        uuid,
+        deleted,
+        created_by,
+        updated_by,
+        created_at,
+        updated_at,
+        description
+    </sql>
+
+    <!-- keyProperty="id" useGeneratedKeys="true"  -->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="bookPO.id">
+        INSERT INTO book (
+            note_id,
+            name,
+            color,
+            sortname,
+            id,
+            uuid,
+            deleted,
+            created_by,
+            updated_by,
+            created_at,
+            updated_at,
+            description
+        ) VALUES (
+            #{bookPO.noteId,jdbcType=VARCHAR},
+            #{bookPO.name,jdbcType=VARCHAR},
+            #{bookPO.color,jdbcType=VARCHAR},
+            #{bookPO.sortname,jdbcType=INTEGER},
+            #{bookPO.id,jdbcType=INTEGER},
+            #{bookPO.uuid,jdbcType=VARCHAR},
+            #{bookPO.deleted,jdbcType=TINYINT},
+            #{bookPO.createdBy,jdbcType=INTEGER},
+            #{bookPO.updatedBy,jdbcType=INTEGER},
+            #{bookPO.createdAt,jdbcType=TIMESTAMP},
+            #{bookPO.updatedAt,jdbcType=TIMESTAMP},
+            #{bookPO.description,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="bookPO.id">
+        INSERT INTO book
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="bookPO.noteId!=null">note_id,</if>
+            <if test="bookPO.name!=null">name,</if>
+            <if test="bookPO.color!=null">color,</if>
+            <if test="bookPO.sortname!=null">sortname,</if>
+            <if test="bookPO.id!=null">id,</if>
+            <if test="bookPO.uuid!=null">uuid,</if>
+            <if test="bookPO.deleted!=null">deleted,</if>
+            <if test="bookPO.createdBy!=null">created_by,</if>
+            <if test="bookPO.updatedBy!=null">updated_by,</if>
+            <if test="bookPO.createdAt!=null">created_at,</if>
+            <if test="bookPO.updatedAt!=null">updated_at,</if>
+            <if test="bookPO.description!=null">description,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="bookPO.noteId!=null">#{bookPO.noteId,jdbcType=VARCHAR},</if>
+            <if test="bookPO.name!=null">#{bookPO.name,jdbcType=VARCHAR},</if>
+            <if test="bookPO.color!=null">#{bookPO.color,jdbcType=VARCHAR},</if>
+            <if test="bookPO.sortname!=null">#{bookPO.sortname,jdbcType=INTEGER},</if>
+            <if test="bookPO.id!=null">#{bookPO.id,jdbcType=INTEGER},</if>
+            <if test="bookPO.uuid!=null">#{bookPO.uuid,jdbcType=VARCHAR},</if>
+            <if test="bookPO.deleted!=null">#{bookPO.deleted,jdbcType=TINYINT},</if>
+            <if test="bookPO.createdBy!=null">#{bookPO.createdBy,jdbcType=INTEGER},</if>
+            <if test="bookPO.updatedBy!=null">#{bookPO.updatedBy,jdbcType=INTEGER},</if>
+            <if test="bookPO.createdAt!=null">#{bookPO.createdAt,jdbcType=TIMESTAMP},</if>
+            <if test="bookPO.updatedAt!=null">#{bookPO.updatedAt,jdbcType=TIMESTAMP},</if>
+            <if test="bookPO.description!=null">#{bookPO.description,jdbcType=VARCHAR},</if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO book (
+        <include refid="Base_Column_List"/>
+        )VALUES
+        <foreach collection="bookPOs" item="bookPO" index="index" separator=",">
+            (
+            #{bookPO.noteId,jdbcType=VARCHAR},
+            #{bookPO.name,jdbcType=VARCHAR},
+            #{bookPO.color,jdbcType=VARCHAR},
+            #{bookPO.sortname,jdbcType=INTEGER},
+            #{bookPO.id,jdbcType=INTEGER},
+            #{bookPO.uuid,jdbcType=VARCHAR},
+            #{bookPO.deleted,jdbcType=TINYINT},
+            #{bookPO.createdBy,jdbcType=INTEGER},
+            #{bookPO.updatedBy,jdbcType=INTEGER},
+            #{bookPO.createdAt,jdbcType=TIMESTAMP},
+            #{bookPO.updatedAt,jdbcType=TIMESTAMP},
+            #{bookPO.description,jdbcType=VARCHAR}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE book
+        <set>
+            <if test="bookPO.noteId != null">note_id= #{bookPO.noteId,jdbcType=VARCHAR},</if>
+            <if test="bookPO.name != null">name= #{bookPO.name,jdbcType=VARCHAR},</if>
+            <if test="bookPO.color != null">color= #{bookPO.color,jdbcType=VARCHAR},</if>
+            <if test="bookPO.sortname != null">sortname= #{bookPO.sortname,jdbcType=INTEGER},</if>
+            <if test="bookPO.id != null">id= #{bookPO.id,jdbcType=INTEGER},</if>
+            <if test="bookPO.uuid != null">id= #{bookPO.uuid,jdbcType=VARCHAR},</if>
+            <if test="bookPO.deleted != null">deleted= #{bookPO.deleted,jdbcType=TINYINT},</if>
+            <if test="bookPO.createdBy != null">created_by= #{bookPO.createdBy,jdbcType=INTEGER},</if>
+            <if test="bookPO.updatedBy != null">updated_by= #{bookPO.updatedBy,jdbcType=INTEGER},</if>
+            <if test="bookPO.createdAt != null">created_at= #{bookPO.createdAt,jdbcType=TIMESTAMP},</if>
+            <if test="bookPO.updatedAt != null">updated_at= #{bookPO.updatedAt,jdbcType=TIMESTAMP},</if>
+            <if test="bookPO.description != null">description= #{bookPO.description,jdbcType=VARCHAR}</if>
+        </set>
+        WHERE id = #{bookPO.id,jdbcType=INTEGER}
+    </update>
+
+    <select id="findAll" resultMap="BaseResultMap">
+        select * from ${collection}+
+    </select>
+
+    <select id="selectById" resultMap="BaseResultMap" parameterMap="java.lang.Integer">
+        select * from book where id = #{id} and deleted = 0
+    </select>
+
+    <select id="selectByUUID" resultMap="BaseResultMap" parameterMap="java.lang.String">
+        select * from book where uuid = ${uuid} and deleted = 0
+    </select>
+
+    <update id="deleteById" parameterMap="java.lang.Integer">
+        update book set deleted = 1,updatedBy = ${updatedBy},updatedAt=now() where id =#{id}
+    </update>
+
+    <update id="deleteByUUID" parameterMap="java.lang.String">
+        update book set deleted = 1,updatedBy = ${updatedBy},updatedAt=now() where uuid =#{uuid}
+    </update>
+
+
+</mapper>
+

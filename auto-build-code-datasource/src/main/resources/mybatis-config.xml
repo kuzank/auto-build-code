@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 配置数据源 -->
+    <!--<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">-->
+        <!--<property name="poolName" value="master"/>-->
+        <!--<property name="driverClassName" value="com.mysql.jdbc.Driver"/>-->
+        <!--<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/markdown_test?useSSL=false"/>-->
+        <!--<property name="username" value="root"/>-->
+        <!--<property name="password" value="kuzankuzan"/>-->
+        <!--<property name="maximumPoolSize" value="32"/>-->
+    <!--</bean>-->
+
+    <!-- MyBatis sql文件 -->
+    <!--<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">-->
+    <!--<property name="dataSource" ref="dataSource"/>-->
+    <!--</bean>-->
+
+    <!--<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">-->
+    <!--<property name="basePackage" value="com.zmgj.zmxj.mapper"/>-->
+    <!--<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>-->
+    <!--</bean>-->
+
+    <!--&lt;!&ndash; 配置事务管理器 &ndash;&gt;-->
+    <!--<bean id="transactionManager"-->
+    <!--class="org.springframework.jdbc.datasource.DataSourceTransactionManager">-->
+    <!--<property name="dataSource" ref="dataSource"/>-->
+    <!--</bean>-->
+
+    <!-- 拦截器方式配置事物 -->
+    <!--<tx:advice id="transactionAdvice">-->
+    <!--<tx:attributes>-->
+    <!--<tx:method name="insert*" rollback-for="java.lang.Exception"/>-->
+    <!--<tx:method name="update*" rollback-for="java.lang.Exception"/>-->
+    <!--<tx:method name="delete*" rollback-for="java.lang.Exception"/>-->
+    <!--<tx:method name="handle*" rollback-for="java.lang.Exception"/>-->
+
+    <!--<tx:method name="get*" propagation="SUPPORTS" read-only="true"/>-->
+    <!--<tx:method name="find*" propagation="SUPPORTS" read-only="true"/>-->
+    <!--<tx:method name="select*" propagation="SUPPORTS" read-only="true"/>-->
+    <!--</tx:attributes>-->
+    <!--</tx:advice>-->
+
+    <!-- Spring aop事务管理 -->
+    <!--<aop:config>-->
+    <!--<aop:pointcut id="transactionPointcut" expression="execution(* com.zmgj.zmxj.service..*Impl.*(..))"/>-->
+    <!--<aop:advisor pointcut-ref="transactionPointcut" advice-ref="transactionAdvice"/>-->
+    <!--</aop:config>-->
+
+</beans>

@@ -1,0 +1,7 @@
+# Created by .ignore support plugin (hsz.mobi)
+.idea
+auto-build-code.iml
+auto-build-code-commander/logs
+auto-build-code-commander/target
+auto-build-code-common/target
+auto-build-code-datasource/target

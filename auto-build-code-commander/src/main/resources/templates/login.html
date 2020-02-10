@@ -1,0 +1,56 @@
+<!--
+ * <p>Description: </p>
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" class="uk-height-1-1" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <link rel="stylesheet" href="../static/css/materialize.css" th:href="@{static/css/materialize.css}"/>
+    <link rel="stylesheet" href="../static/css/github-markdown.css" th:href="@{static/css/github-markdown.css}"/>
+    <style>
+        .container {
+            margin-top: 120px;
+        }
+
+        h4 {
+            margin: 30px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col s6 offset-s3">
+            <div class="card card-panel">
+                <h4 class="center-align">统一授权中心</h4>
+                <form method="post" th:action="@{/login/authentication}">
+                    <div class="uk-form-row">
+                        <input class="uk-width-1-1 uk-form-large" type="text" placeholder="请输入用户名"
+                               name="username"/>
+                    </div>
+                    <div class="uk-form-row">
+                        <input class="uk-width-1-1 uk-form-large" type="password" placeholder="请输入密码"
+                               name="password"/>
+                    </div>
+                    <!--验证码-->
+                    <div class="row">
+                        <div class="col s8">
+                            <input type="text" name="code" placeholder="请输入验证码"/>
+                        </div>
+                        <div class="col s3">
+                            <img src="" th:src="@{kaptcha/randCode}" title="点我重新获取验证码"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="s4 col offset-s8">
+                            <button class="btn btn-block">登录</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
